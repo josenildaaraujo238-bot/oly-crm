@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OLY - Automação e Relacionamento</title>
+  <style>
+    :root {
+      --bg-color: #121214;
+      --card-bg: #1e1e22;
+      --pink: #ff2a75;
+      --green: #c4f82a;
+      --orange: #ffb800;
+      --text: #ffffff;
+      --text-muted: #a1a1aa;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 8%;
+      background-color: var(--bg-color);
+      border-bottom: 1px solid #27272a;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--pink);
+      letter-spacing: 1px;
+    }
+
+    .logo span {
+      color: var(--green);
+    }
+
+    nav a {
+      color: var(--text);
+      text-decoration: none;
+      margin: 0 15px;
+      font-size: 15px;
+      transition: opacity 0.2s;
+    }
+
+    nav a:hover {
+      opacity: 0.8;
+    }
+
+    .btn-cta {
+      background-color: var(--pink);
+      color: #fff;
+      padding: 10px 22px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 14px;
+      transition: transform 0.2s;
+      display: inline-block;
+    }
+
+    .btn-cta:hover {
+      transform: scale(1.03);
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 80px 20px 50px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .badge {
+      border: 1px solid var(--green);
+      color: var(--green);
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 13px;
+      display: inline-block;
+      margin-bottom: 25px;
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 span {
+      color: var(--pink);
+    }
+
+    .hero p {
+      color: var(--text-muted);
+      font-size: 18px;
+      margin-bottom: 35px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .btn-green {
+      background-color: var(--green);
+      color: #000;
+      padding: 12px 28px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .btn-pink {
+      background-color: var(--pink);
+      color: #fff;
+      padding: 12px 28px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    /* Features Section */
+    .features {
+      padding: 60px 8%;
+      text-align: center;
+    }
+
+    .features h2 {
+      font-size: 32px;
+      margin-bottom: 40px;
+    }
+
+    .features h2 span {
+      color: var(--orange);
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background-color: var(--card-bg);
+      padding: 30px 20px;
+      border-radius: 12px;
+      text-align: left;
+      border: 1px solid #27272a;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .card-num {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      margin-bottom: 20px;
+      color: #000;
+    }
+
+    .num-pink { background-color: var(--pink); color: #fff; }
+    .num-green { background-color: var(--green); }
+    .num-orange { background-color: var(--orange); }
+
+    .card h3 {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      color: var(--text-muted);
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .card-btn {
+      display: inline-block;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: bold;
+      padding: 8px 14px;
+      border-radius: 6px;
+      width: fit-content;
+    }
+
+    .card-btn-pink { background-color: var(--pink); color: #fff; }
+    .card-btn-green { background-color: var(--green); color: #000; }
+    .card-btn-orange { background-color: var(--orange); color: #000; }
+
+    /* Pricing Section */
+    .pricing {
+      padding: 80px 8%;
+      text-align: center;
+    }
+
+    .pricing h2 {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .pricing-sub {
+      color: var(--text-muted);
+      margin-bottom: 50px;
+    }
+
+    .plans-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+      max-width: 1100px;
+      margin: 0 auto;
+      align-items: stretch;
+    }
+
+    .plan-card {
+      background-color: var(--card-bg);
+      border-radius: 16px;
+      padding: 35px 25px;
+      text-align: left;
+      border: 1px solid #27272a;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .plan-card.featured {
+      border: 2px solid var(--pink);
+    }
+
+    .popular-tag {
+      position: absolute;
+      top: -12px;
+      right: 20px;
+      background-color: var(--pink);
+      color: #fff;
+      font-size: 11px;
+      font-weight: bold;
+      padding: 4px 12px;
+      border-radius: 12px;
+      text-transform: uppercase;
+    }
+
+    .plan-card h3 {
+      font-size: 22px;
+      margin-bottom: 15px;
+    }
+
+    .plan-card .price {
+      font-size: 38px;
+      font-weight: 800;
+      margin-bottom: 20px;
+    }
+
+    .plan-card .price span {
+      font-size: 14px;
+      color: var(--text-muted);
+      font-weight: normal;
+    }
+
+    .plan-features {
+      list-style: none;
+      margin-bottom: 30px;
+      flex-grow: 1;
+    }
+
+    .plan-features li {
+      margin-bottom: 12px;
+      font-size: 14px;
+      color: #e4e4e7;
+    }
+
+    .plan-features li::before {
+      content: "✓ ";
+      color: var(--green);
+      font-weight: bold;
+    }
+
+    .btn-plan {
+      display: block;
+      text-align: center;
+      padding: 12px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .btn-plan-green { background-color: var(--green); color: #000; }
+    .btn-plan-pink { background-color: var(--pink); color: #fff; }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="logo">OLY<span>.</span></div>
+    <nav>
+      <a href="#como-funciona">Como Funciona</a>
+      <a href="#recursos">Recursos</a>
+      <a href="#planos">Planos</a>
+    </nav>
+    <a href="/app" class="btn-cta">Começar Agora</a>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="badge">A Oly trabalha enquanto seu restaurante vende</div>
+    <h1>Automatize o relacionamento.<br><span>Aumente a recorrência.</span></h1>
+    <p>Você não precisa apenas de novos clientes. Precisa fazer os clientes que já conhecem o seu restaurante voltarem mais vezes.</p>
+    <div class="hero-buttons">
+      <a href="/app" class="btn-green">Testar a Plataforma</a>
+      <a href="https://wa.me/5587991076937?text=Olá!%20Gostaria%20de%20ver%20uma%20demonstração%20do%20OLY%20CRM." target="_blank" class="btn-pink">Ver Demonstração</a>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features" id="como-funciona">
+    <h2>Como a <span>Oly</span> transforma dados em receita</h2>
+    <div class="cards-grid">
+      <!-- Card 1: Segmentação Automática -->
+      <div class="card">
+        <div>
+          <div class="card-num num-pink">01</div>
+          <h3>Segmentação Automática</h3>
+          <p>Identifique automaticamente clientes VIP, novos, frequentes, aniversariantes e clientes em risco de inatividade.</p>
+        </div>
+        <a href="/app" class="card-btn card-btn-pink">Ver Segmentos no CRM</a>
+      </div>
+
+      <!-- Card 2: Automações no WhatsApp -->
+      <div class="card">
+        <div>
+          <div class="card-num num-green">02</div>
+          <h3>Automações no WhatsApp</h3>
+          <p>Crie jornadas disparadas por gatilhos comportamentais (ex: 30 dias sem comprar) com cupons e incentivos à recompra.</p>
+        </div>
+        <a href="https://wa.me/5587991076937?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20as%20automações%20do%20WhatsApp%20no%20OLY%20CRM." target="_blank" class="card-btn card-btn-green">Falar no WhatsApp</a>
+      </div>
+
+      <!-- Card 3: Dashboard Financeiro -->
+      <div class="card">
+        <div>
+          <div class="card-num num-orange">03</div>
+          <h3>Dashboard Financeiro</h3>
+          <p>Acompanhe o retorno em reais gerado pelas automações (pedidos recuperados x faturamento), não apenas métricas de envio.</p>
+        </div>
+        <a href="/app" class="card-btn card-btn-orange">Acessar Dashboard</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section class="pricing" id="planos">
+    <h2>Planos para o seu crescimento</h2>
+    <p class="pricing-sub">Escolha o plano ideal para a maturidade do seu restaurante.</p>
+
+    <div class="plans-grid">
+      <!-- Plano Start -->
+      <div class="plan-card">
+        <h3>OLY START</h3>
+        <div class="price">R$ 199 <span>/mês</span></div>
+        <ul class="plan-features">
+          <li>CRM de Clientes</li>
+          <li>Segmentação Básica</li>
+          <li>Automações Essenciais</li>
+          <li>Agendamento de Campanha</li>
+          <li>Dashboard de Desempenho</li>
+        </ul>
+        <a href="https://wa.me/5587991076937?text=Olá!%20Tenho%20interesse%20em%20assinar%20o%20Plano%20OLY%20START%20(R$%20199/mês)." target="_blank" class="btn-plan btn-plan-green">Assinar Start</a>
+      </div>
+
+      <!-- Plano Growth (Destaque) -->
+      <div class="plan-card featured">
+        <div class="popular-tag">MAIS POPULAR</div>
+        <h3>OLY GROWTH</h3>
+        <div class="price">R$ 399 <span>/mês</span></div>
+        <ul class="plan-features">
+          <li>Recursos do plano Start</li>
+          <li>Integração WhatsApp</li>
+          <li>Programa de Fidelidade</li>
+          <li>Relatórios Avançados</li>
+          <li>IA para sugestão de campanhas</li>
+        </ul>
+        <a href="https://wa.me/5587991076937?text=Olá!%20Tenho%20interesse%20em%20assinar%20o%20Plano%20OLY%20GROWTH%20(R$%20399/mês)." target="_blank" class="btn-plan btn-plan-pink">Assinar Growth</a>
+      </div>
+
+      <!-- Plano Performance -->
+      <div class="plan-card">
+        <h3>OLY PERFORMANCE</h3>
+        <div class="price">R$ 699+ <span>/mês</span></div>
+        <ul class="plan-features">
+          <li>Recursos do plano Growth</li>
+          <li>Inteligência Comercial Dedicada</li>
+          <li>Automações Avançadas</li>
+          <li>Estratégia Oly Exclusiva</li>
+          <li>Suporte Prioritário</li>
+        </ul>
+        <a href="https://wa.me/5587991076937?text=Olá!%20Gostaria%20de%20falar%20com%20um%20consultor%20sobre%20o%20Plano%20OLY%20PERFORMANCE." target="_blank" class="btn-plan btn-plan-green">Falar com Consultor</a>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>

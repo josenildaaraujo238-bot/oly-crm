@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OLY CRM - Automação para Restaurantes</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div class="app-layout">
+
+    <!-- ===================== SIDEBAR ===================== -->
+    <aside class="sidebar">
+      <div class="logo">OLY<span>.</span></div>
+      <nav>
+        <div class="nav-item active" data-view="dashboard">
+          <span class="nav-icon">▦</span> Dashboard
+        </div>
+        <div class="nav-item" data-view="clientes">
+          <span class="nav-icon">👥</span> Clientes
+        </div>
+        <div class="nav-item" data-view="segmentos">
+          <span class="nav-icon">🏷</span> Segmentos
+        </div>
+        <div class="nav-item" data-view="automacoes">
+          <span class="nav-icon">⚡</span> Automações
+        </div>
+        <div class="nav-item" data-view="agenda">
+          <span class="nav-icon">📅</span> Agenda
+        </div>
+      </nav>
+      <div class="sidebar-footer">OLY CRM v1.0 &middot; MVP</div>
+    </aside>
+
+    <!-- ===================== CONTEÚDO ===================== -->
+    <main class="main-content">
+
+      <!-- ---------- VIEW: DASHBOARD ---------- -->
+      <section class="view active" id="view-dashboard">
+        <div class="page-header">
+          <div>
+            <h1>Dashboard</h1>
+            <p>Resultado financeiro das automações da Oly</p>
+          </div>
+          <button class="btn btn-primary" id="btn-rodar-automacoes">⚡ Rodar automações agora</button>
+        </div>
+
+        <div class="metrics-grid" id="dashboard-metrics">
+          <!-- preenchido via JS -->
+        </div>
+
+        <div class="card-panel">
+          <div class="card-panel-header"><h3>Clientes por segmento</h3></div>
+          <div class="table-container">
+            <table id="tabela-segmentos-dashboard">
+              <thead><tr><th>Segmento</th><th>Clientes</th><th>Gasto total acumulado</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ---------- VIEW: CLIENTES ---------- -->
+      <section class="view" id="view-clientes">
+        <div class="page-header">
+          <div>
+            <h1>Clientes</h1>
+            <p>Base de clientes e segmentação automática</p>
+          </div>
+          <button class="btn btn-primary" id="btn-novo-cliente">+ Novo Cliente</button>
+        </div>
+
+        <div class="card-panel">
+          <div class="card-panel-header">
+            <h3>Todos os clientes</h3>
+            <select id="filtro-segmento" style="background:#121214;color:#fff;border:1px solid #27272A;padding:0.5rem;border-radius:8px;">
+              <option value="todos">Todos os segmentos</option>
+              <option value="vip">VIP</option>
+              <option value="novo">Novo</option>
+              <option value="frequente">Frequente</option>
+              <option value="inativo">Inativo</option>
+              <option value="risco">Em risco</option>
+            </select>
+          </div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr><th>Nome</th><th>Contato</th><th>Última compra</th><th>Gasto total</th><th>Pedidos</th><th>Segmento</th><th>Ações</th></tr>
+              </thead>
+              <tbody id="tabela-clientes"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ---------- VIEW: SEGMENTOS ---------- -->
+      <section class="view" id="view-segmentos">
+        <div class="page-header">
+          <div>
+            <h1>Segmentos</h1>
+            <p>Visão consolidada da base por comportamento de compra</p>
+          </div>
+        </div>
+        <div class="metrics-grid" id="segmentos-metrics"></div>
+      </section>
+
+      <!-- ---------- VIEW: AUTOMAÇÕES ---------- -->
+      <section class="view" id="view-automacoes">
+        <div class="page-header">
+          <div>
+            <h1>Automações</h1>
+            <p>Gatilho + espera + ação — o motor de recorrência da Oly</p>
+          </div>
+          <button class="btn btn-primary" id="btn-nova-automacao">+ Nova Automação</button>
+        </div>
+
+        <div class="card-panel">
+          <div class="card-panel-header"><h3>Automações cadastradas</h3></div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr><th>Nome</th><th>Gatilho</th><th>Ação</th><th>Segmento alvo</th><th>Status</th><th>Ações</th></tr>
+              </thead>
+              <tbody id="tabela-automacoes"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card-panel">
+          <div class="card-panel-header"><h3>Histórico de disparos</h3></div>
+          <div class="table-container">
+            <table>
+              <thead><tr><th>Automação</th><th>Cliente</th><th>Status</th><th>Data</th></tr></thead>
+              <tbody id="tabela-execucoes"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ---------- VIEW: AGENDA ---------- -->
+      <section class="view" id="view-agenda">
+        <div class="page-header">
+          <div>
+            <h1>Agenda</h1>
+            <p>Campanhas programadas por dia da semana</p>
+          </div>
+        </div>
+        <div class="card-panel">
+          <div class="table-container">
+            <table>
+              <thead><tr><th>Campanha</th><th>Dia</th><th>Horário</th><th>Segmento</th><th>Status</th></tr></thead>
+              <tbody id="tabela-agenda"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ===================== MODAL: NOVO CLIENTE ===================== -->
+  <div class="modal-overlay" id="modal-cliente">
+    <div class="modal-box">
+      <h2>Novo Cliente</h2>
+      <form id="form-cliente">
+        <div class="form-group"><label>Nome</label><input type="text" id="cliente-nome" required></div>
+        <div class="form-group"><label>Telefone / WhatsApp</label><input type="tel" id="cliente-telefone" required></div>
+        <div class="form-group"><label>E-mail</label><input type="email" id="cliente-email"></div>
+        <div class="form-group"><label>Data de nascimento</label><input type="date" id="cliente-nascimento"></div>
+        <div class="form-actions">
+          <button type="button" class="btn btn-outline" onclick="fecharModal('modal-cliente')">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Salvar Cliente</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===================== MODAL: REGISTRAR COMPRA ===================== -->
+  <div class="modal-overlay" id="modal-compra">
+    <div class="modal-box">
+      <h2>Registrar Compra</h2>
+      <form id="form-compra">
+        <input type="hidden" id="compra-cliente-id">
+        <div class="form-group"><label>Valor da compra (R$)</label><input type="number" step="0.01" id="compra-valor" required></div>
+        <div class="form-actions">
+          <button type="button" class="btn btn-outline" onclick="fecharModal('modal-compra')">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Registrar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===================== MODAL: NOVA AUTOMAÇÃO ===================== -->
+  <div class="modal-overlay" id="modal-automacao">
+    <div class="modal-box">
+      <h2>Nova Automação</h2>
+      <form id="form-automacao">
+        <div class="form-group"><label>Nome da automação</label><input type="text" id="auto-nome" required></div>
+        <div class="form-group">
+          <label>Gatilho</label>
+          <select id="auto-gatilho" required>
+            <option value="primeira_compra">Primeira compra</option>
+            <option value="inativo_15_dias">15 dias sem comprar</option>
+            <option value="inativo_30_dias">30 dias sem comprar</option>
+            <option value="aniversario">Aniversário do cliente</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Ação</label>
+          <select id="auto-acao" required>
+            <option value="whatsapp">Enviar WhatsApp</option>
+            <option value="email">Enviar e-mail</option>
+            <option value="cupom">Criar cupom</option>
+            <option value="pontos">Adicionar pontos</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Segmento alvo</label>
+          <select id="auto-segmento">
+            <option value="todos">Todos</option>
+            <option value="vip">VIP</option>
+            <option value="novo">Novo</option>
+            <option value="frequente">Frequente</option>
+            <option value="inativo">Inativo</option>
+            <option value="risco">Em risco</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Mensagem (use {nome} para personalizar)</label><textarea id="auto-mensagem" rows="3"></textarea></div>
+        <div class="form-actions">
+          <button type="button" class="btn btn-outline" onclick="fecharModal('modal-automacao')">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Criar Automação</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

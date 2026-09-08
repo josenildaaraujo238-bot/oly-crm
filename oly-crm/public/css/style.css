@@ -1,0 +1,188 @@
+/* =========================================================
+   OLY CRM - FOLHA DE ESTILOS
+   Paleta oficial do projeto: rosa, verde-lima e laranja
+   ========================================================= */
+
+:root {
+  --primary: #FF3D8B;
+  --secondary: #C7F04A;
+  --accent: #FFB020;
+  --dark: #121214;
+  --card-bg: #1A1A1E;
+  --text: #F5F5F7;
+  --text-muted: #A1A1AA;
+  --border: #27272A;
+  --sidebar-width: 240px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+
+body { background-color: var(--dark); color: var(--text); line-height: 1.6; }
+
+a { text-decoration: none; color: inherit; }
+button { font-family: inherit; }
+
+/* ---------- LAYOUT GERAL ---------- */
+.app-layout { display: flex; min-height: 100vh; }
+
+/* ---------- SIDEBAR ---------- */
+.sidebar {
+  width: var(--sidebar-width);
+  background-color: #0D0D0F;
+  border-right: 1px solid var(--border);
+  padding: 1.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+.sidebar .logo { font-size: 1.6rem; font-weight: 800; color: var(--primary); margin-bottom: 2rem; padding-left: 0.5rem; }
+.sidebar .logo span { color: var(--secondary); }
+
+.sidebar nav { flex-grow: 1; }
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.8rem 0.9rem;
+  border-radius: 10px;
+  color: var(--text-muted);
+  cursor: pointer;
+  margin-bottom: 0.3rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+}
+
+.nav-item:hover { background-color: #1c1c20; color: var(--text); }
+
+.nav-item.active {
+  background-color: var(--primary);
+  color: #fff;
+}
+
+.nav-icon { width: 20px; text-align: center; }
+
+.sidebar-footer { font-size: 0.75rem; color: var(--text-muted); padding: 0.5rem; }
+
+/* ---------- CONTEÚDO PRINCIPAL ---------- */
+.main-content { flex-grow: 1; padding: 2rem 2.5rem; max-width: 1400px; }
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.page-header h1 { font-size: 1.8rem; }
+.page-header p { color: var(--text-muted); font-size: 0.95rem; margin-top: 0.25rem; }
+
+.view { display: none; animation: fadeIn 0.3s ease-in-out; }
+.view.active { display: block; }
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ---------- BOTÕES ---------- */
+.btn {
+  padding: 0.7rem 1.3rem;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease;
+  font-size: 0.9rem;
+}
+
+.btn-primary { background-color: var(--primary); color: #fff; }
+.btn-primary:hover { background-color: #e0327a; transform: translateY(-1px); }
+
+.btn-secondary { background-color: var(--secondary); color: var(--dark); }
+.btn-secondary:hover { background-color: #b5dc3f; transform: translateY(-1px); }
+
+.btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text); }
+.btn-outline:hover { border-color: var(--secondary); color: var(--secondary); }
+
+.btn-danger { background-color: transparent; color: var(--primary); border: 1px solid var(--primary); }
+.btn-danger:hover { background-color: var(--primary); color: #fff; }
+
+.btn-sm { padding: 0.4rem 0.8rem; font-size: 0.8rem; }
+
+/* ---------- CARDS DE MÉTRICA ---------- */
+.metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.2rem; margin-bottom: 2rem; }
+
+.metric-card { background-color: var(--card-bg); padding: 1.4rem 1.5rem; border-radius: 12px; border: 1px solid var(--border); }
+.metric-title { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.4rem; text-transform: uppercase; letter-spacing: 0.5px; }
+.metric-value { font-size: 1.7rem; font-weight: 800; color: var(--secondary); }
+.metric-value.accent { color: var(--accent); }
+.metric-value.primary { color: var(--primary); }
+
+/* ---------- TABELAS ---------- */
+.card-panel { background-color: var(--card-bg); border-radius: 12px; border: 1px solid var(--border); padding: 1.5rem; margin-bottom: 1.5rem; }
+.card-panel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.2rem; }
+.card-panel-header h3 { font-size: 1.1rem; }
+
+.table-container { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; text-align: left; }
+th, td { padding: 0.9rem 0.7rem; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+th { color: var(--secondary); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.5px; }
+tbody tr:hover { background-color: #202024; }
+
+.tag { padding: 0.25rem 0.6rem; border-radius: 12px; font-size: 0.75rem; font-weight: bold; display: inline-block; }
+.tag-vip { background-color: rgba(255, 176, 32, 0.15); color: var(--accent); }
+.tag-novo { background-color: rgba(199, 240, 74, 0.15); color: var(--secondary); }
+.tag-risco { background-color: rgba(255, 61, 139, 0.15); color: var(--primary); }
+.tag-inativo { background-color: rgba(161, 161, 170, 0.2); color: var(--text-muted); }
+.tag-frequente { background-color: rgba(80, 160, 255, 0.15); color: #6cb2ff; }
+
+.status-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 6px; }
+.status-ativa { background-color: var(--secondary); }
+.status-pausada { background-color: var(--text-muted); }
+
+/* ---------- FORMULÁRIOS / MODAL ---------- */
+.modal-overlay {
+  display: none;
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.75);
+  z-index: 2000;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+.modal-overlay.active { display: flex; }
+
+.modal-box {
+  background-color: var(--card-bg);
+  padding: 2rem;
+  border-radius: 14px;
+  max-width: 480px;
+  width: 100%;
+  border: 1px solid var(--border);
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-box h2 { margin-bottom: 1.2rem; color: var(--secondary); font-size: 1.3rem; }
+
+.form-group { margin-bottom: 1rem; }
+.form-group label { display: block; margin-bottom: 0.4rem; font-size: 0.85rem; color: var(--text-muted); }
+.form-group input, .form-group select, .form-group textarea {
+  width: 100%; padding: 0.7rem; background: #121214; border: 1px solid var(--border);
+  color: white; border-radius: 8px; font-size: 0.9rem;
+}
+.form-actions { display: flex; gap: 0.8rem; margin-top: 1.5rem; }
+.form-actions .btn { flex: 1; }
+
+.empty-state { text-align: center; padding: 2.5rem 1rem; color: var(--text-muted); }
+
+/* ---------- RESPONSIVO ---------- */
+@media (max-width: 900px) {
+  .app-layout { flex-direction: column; }
+  .sidebar { width: 100%; height: auto; position: relative; flex-direction: row; overflow-x: auto; }
+  .sidebar .logo { display: none; }
+  .sidebar nav { display: flex; flex-grow: 0; }
+  .main-content { padding: 1.5rem; }
+}
